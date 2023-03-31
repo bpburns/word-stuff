@@ -4,7 +4,7 @@ import time
 import json
 from supertrie import *
 
-with open('american-english', 'r') as f:
+with open('american-english-huge', 'r') as f:
     english_words = f.read().splitlines()
 
 replacement_map = {
@@ -47,6 +47,10 @@ for word in english_words:
         english_words_pruned.add(word.lower())
 
 sorted_word_list = sorted(english_words_pruned)
+
+for word in sorted_word_list:
+    print(word)
+sys.exit(0)
 
 class node(object):
     def __init__(self, data):
