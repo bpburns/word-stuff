@@ -2,6 +2,7 @@ from collections import Counter
 import sys
 import time
 import json
+from supertrie import *
 
 with open('american-english', 'r') as f:
     english_words = f.read().splitlines()
@@ -114,4 +115,16 @@ class node(object):
 root = node('')
 for word in sorted_word_list:
     root.insert(word)
+timer1 = time.time()
 print(root.count_words('chu'))
+timer2 = time.time()
+print(timer2 - timer1)
+
+tree = Trie()
+for word in sorted_word_list:
+    tree.insert(word)
+timer1 = time.time()
+print(tree.query('chu'))
+timer2 = time.time()
+print(timer2 - timer1)
+
