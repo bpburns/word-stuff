@@ -2,7 +2,7 @@ from collections import Counter
 import sys
 import time
 
-with open('american-english', 'r') as f:
+with open('american-english-insane', 'r') as f:
     english_words = f.read().splitlines()
 
 replacement_map = {

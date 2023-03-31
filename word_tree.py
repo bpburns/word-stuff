@@ -4,7 +4,7 @@ import time
 import json
 from supertrie import *
 
-with open('american-english-huge', 'r') as f:
+with open('american-english-insane', 'r') as f:
     english_words = f.read().splitlines()
 
 replacement_map = {
