@@ -15,6 +15,18 @@ def fast_search(prefix):
 
 
 raw_grid = '''
+opoleiaft
+ yusoio s
+reaaeug w
+qrxnstocu
+esivpfdaa
+hli cnmbt
+ihntei ry
+avc dodsw
+bgesi ges
+keijorrlz
+tuhl sean
+mtead nc
 '''
 
 def get_grid_max_line_len(grid):
@@ -89,9 +101,6 @@ def walk_cell(grid, prefix, x, y):
 
     prefix = prefix + value
     result = fast_search(prefix)
-    print_grid(grid)
-    print('Prefix:', prefix)
-    print('Num results:', len(result))
     if len(result) == 0:
         return results
 
@@ -129,7 +138,6 @@ print_grid(grid)
 
 grid_width = get_grid_width(grid)
 grid_height = get_grid_height(grid)
-print('width', grid_width, 'height', grid_height)
 
 results = set()
 for x in range(grid_width):
