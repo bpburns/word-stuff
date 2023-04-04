@@ -15,6 +15,7 @@ class TrieNode:
         # a dictionary of child nodes
         # keys are characters, values are nodes
         self.children = {}
+
 class Trie(object):
     """The trie object"""
 

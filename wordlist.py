@@ -2,7 +2,9 @@ from collections import Counter
 import time
 import json
 
-with open('american-english-insane', 'r') as f:
+WORD_FILE = 'american-english-insane'
+print(f'Reading word file {WORD_FILE}')
+with open(WORD_FILE, 'r') as f:
     english_words = f.read().splitlines()
 
 replacement_map = {
@@ -25,6 +27,7 @@ replacement_map = {
 }
 
 # Remove words with punctuation
+print('Normalizing word list.')
 upper_alphas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 lower_alphas = upper_alphas.lower()
 alpha_characters = set(list(upper_alphas))
@@ -44,6 +47,7 @@ for word in english_words:
     if not charset - alpha_characters and len(word) > 2:
         english_words_pruned.add(word.lower())
 
+print('Sorting word list.')
 sorted_word_list = sorted(english_words_pruned)
 
 WORD_LIST = sorted_word_list

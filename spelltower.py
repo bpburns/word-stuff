@@ -1,3 +1,16 @@
+from wordlist import WORD_LIST
+from copy import deepcopy
+import time
+
+
+def search(prefix):
+    results = []
+    for word in WORD_LIST:
+        if word.startswith(prefix):
+            results.append(word)
+    return results
+
+
 raw_grid = '''
 abcdefg
 hijklmn
@@ -50,11 +63,74 @@ def gen_grid(string):
         grid.append(list(line))
     return grid
 
+def print_grid(grid):
+    for line in grid:
+        for cell in line:
+            print(cell, end='')
+        print()
+
+'''
+123
+8?4
+765
+'''
+def walk_cell(grid, prefix, x, y):
+
+    results = []
+
+    if x < 0 or y < 0:
+        return results
+    try:
+        value = grid[y][x]
+    except IndexError:
+        return results
+
+    if value in {'*', ' '}:
+        return results
+
+    prefix = prefix + value
+    result = search(prefix)
+    print_grid(grid)
+    print('Prefix:', prefix)
+    print('Num results:', len(result))
+    if len(result) == 0:
+        return results
+
+    results.append(result)
+
+    grid = deepcopy(grid)
+    grid[y][x] = '*'
+
+    one = (x - 1, y + 1)
+    results += walk_cell(grid, prefix, one[0], one[1])
+    two = (x, y + 1)
+    results += walk_cell(grid, prefix, two[0], two[1])
+    three = (x + 1, y + 1)
+    results += walk_cell(grid, prefix, three[0], three[1])
+    four = (x + 1, y)
+    results += walk_cell(grid, prefix, four[0], four[1])
+    five = (x + 1, y - 1)
+    results += walk_cell(grid, prefix, five[0], five[1])
+    six = (x, y - 1)
+    results += walk_cell(grid, prefix, six[0], six[1])
+    seven = (x - 1, y - 1)
+    results += walk_cell(grid, prefix, seven[0], seven[1])
+    eight = (x - 1, y)
+    results += walk_cell(grid, prefix, eight[0], eight[1])
+
+    return results
+    
 grid = gen_grid(raw_grid)
 
 pad_grid(grid)
 wrap_grid(grid)
 
+print_grid(grid)
 
-for line in grid:
-    print(line)
+grid_width = get_grid_width(grid)
+grid_height = get_grid_height(grid)
+print('width', grid_width, 'height', grid_height)
+
+for x in range(grid_width):
+    for y in range(grid_height):
+        walk_cell(grid, '', x, y)
