@@ -137,5 +137,5 @@ for x in range(grid_width):
         print(f'Scanning position {x}, {y}')
         results.update(walk_cell(grid, '', x, y))
 print(len(results))
-for result in results:
+for result in sorted(results, key=lambda x: len(x)):
     print(result)
