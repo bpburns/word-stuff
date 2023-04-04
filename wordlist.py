@@ -57,3 +57,8 @@ print('Building word trie.')
 WORD_TRIE = Trie()
 for word in WORD_LIST:
     WORD_TRIE.insert(word)
+
+print('Building word set')
+WORD_SET = set()
+for word in WORD_LIST:
+    WORD_SET.add(word)

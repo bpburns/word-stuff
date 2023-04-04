@@ -1,4 +1,4 @@
-from wordlist import WORD_LIST, WORD_TRIE
+from wordlist import WORD_SET, WORD_TRIE, WORD_LIST
 from copy import deepcopy
 import time
 
@@ -7,6 +7,10 @@ def search(prefix):
     for word in WORD_LIST:
         if word.startswith(prefix):
             results.append(word)
+    return results
+
+def fast_search(prefix):
+    results = WORD_TRIE.query(prefix)
     return results
 
 
@@ -66,7 +70,7 @@ def print_grid(grid):
     for line in grid:
         for cell in line:
             print(cell, end='')
-        print()
+        print(flush=True)
 
 '''
 123
@@ -88,14 +92,14 @@ def walk_cell(grid, prefix, x, y):
         return results
 
     prefix = prefix + value
-    result = search(prefix)
+    result = fast_search(prefix)
     print_grid(grid)
     print('Prefix:', prefix)
     print('Num results:', len(result))
     if len(result) == 0:
         return results
 
-    if len(prefix) > 2 and prefix in WORD_LIST:
+    if len(prefix) > 2 and prefix in WORD_SET:
         results.add(prefix)
 
     grid = deepcopy(grid)
