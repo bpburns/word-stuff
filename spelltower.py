@@ -139,5 +139,3 @@ for x in range(grid_width):
 print(len(results))
 for result in sorted(results, key=lambda x: len(x)):
     print(result)
-
-print('hoopla')
