@@ -1,7 +1,35 @@
-from wordlist import WORD_LIST
+#from wordlist import WORD_LIST
 from copy import deepcopy
 import time
 
+WORD_LIST = {
+        'aardvark',
+        'bob',
+        'cat',
+        'dog',
+        'egg',
+        'fig',
+        'gourd',
+        'hip',
+        'hop',
+        'iris',
+        'joke',
+        'kilo',
+        'lemon',
+        'money',
+        'now',
+        'pop',
+        'queue',
+        'rue',
+        'snake',
+        'time',
+        'umbrella',
+        'vaccum',
+        'walrus',
+        'xenophobe',
+        'yes',
+        'zee'
+        }
 
 def search(prefix):
     results = []
@@ -76,7 +104,7 @@ def print_grid(grid):
 '''
 def walk_cell(grid, prefix, x, y):
 
-    results = []
+    results = set()
 
     if x < 0 or y < 0:
         return results
@@ -96,27 +124,28 @@ def walk_cell(grid, prefix, x, y):
     if len(result) == 0:
         return results
 
-    results.append(result)
+    if len(prefix) > 2 and prefix in WORD_LIST:
+        results.add(prefix)
 
     grid = deepcopy(grid)
     grid[y][x] = '*'
 
     one = (x - 1, y + 1)
-    results += walk_cell(grid, prefix, one[0], one[1])
+    results.update(walk_cell(grid, prefix, one[0], one[1]))
     two = (x, y + 1)
-    results += walk_cell(grid, prefix, two[0], two[1])
+    results.update(walk_cell(grid, prefix, two[0], two[1]))
     three = (x + 1, y + 1)
-    results += walk_cell(grid, prefix, three[0], three[1])
+    results.update(walk_cell(grid, prefix, three[0], three[1]))
     four = (x + 1, y)
-    results += walk_cell(grid, prefix, four[0], four[1])
+    results.update(walk_cell(grid, prefix, four[0], four[1]))
     five = (x + 1, y - 1)
-    results += walk_cell(grid, prefix, five[0], five[1])
+    results.update(walk_cell(grid, prefix, five[0], five[1]))
     six = (x, y - 1)
-    results += walk_cell(grid, prefix, six[0], six[1])
+    results.update(walk_cell(grid, prefix, six[0], six[1]))
     seven = (x - 1, y - 1)
-    results += walk_cell(grid, prefix, seven[0], seven[1])
+    results.update(walk_cell(grid, prefix, seven[0], seven[1]))
     eight = (x - 1, y)
-    results += walk_cell(grid, prefix, eight[0], eight[1])
+    results.update(walk_cell(grid, prefix, eight[0], eight[1]))
 
     return results
     
@@ -131,6 +160,11 @@ grid_width = get_grid_width(grid)
 grid_height = get_grid_height(grid)
 print('width', grid_width, 'height', grid_height)
 
+results = set()
 for x in range(grid_width):
     for y in range(grid_height):
-        walk_cell(grid, '', x, y)
+        print(f'Scanning position {x}, {y}')
+        results.update(walk_cell(grid, '', x, y))
+print(len(results))
+for result in results:
+    print(result)
