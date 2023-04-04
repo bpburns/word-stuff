@@ -1,35 +1,6 @@
-#from wordlist import WORD_LIST
+from wordlist import WORD_LIST, WORD_TRIE
 from copy import deepcopy
 import time
-
-WORD_LIST = {
-        'aardvark',
-        'bob',
-        'cat',
-        'dog',
-        'egg',
-        'fig',
-        'gourd',
-        'hip',
-        'hop',
-        'iris',
-        'joke',
-        'kilo',
-        'lemon',
-        'money',
-        'now',
-        'pop',
-        'queue',
-        'rue',
-        'snake',
-        'time',
-        'umbrella',
-        'vaccum',
-        'walrus',
-        'xenophobe',
-        'yes',
-        'zee'
-        }
 
 def search(prefix):
     results = []

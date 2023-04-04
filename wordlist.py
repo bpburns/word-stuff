@@ -1,6 +1,7 @@
 from collections import Counter
 import time
 import json
+from supertrie import Trie
 
 WORD_FILE = 'american-english-insane'
 print(f'Reading word file {WORD_FILE}')
@@ -51,3 +52,8 @@ print('Sorting word list.')
 sorted_word_list = sorted(english_words_pruned)
 
 WORD_LIST = sorted_word_list
+
+print('Building word trie.')
+WORD_TRIE = Trie()
+for word in WORD_LIST:
+    WORD_TRIE.insert(word)
