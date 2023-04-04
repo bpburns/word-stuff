@@ -15,10 +15,6 @@ def fast_search(prefix):
 
 
 raw_grid = '''
-abcdefg
-hijklmn
-opqrstu
-vwxyz
 '''
 
 def get_grid_max_line_len(grid):
@@ -143,3 +139,5 @@ for x in range(grid_width):
 print(len(results))
 for result in sorted(results, key=lambda x: len(x)):
     print(result)
+
+print('hoopla')
