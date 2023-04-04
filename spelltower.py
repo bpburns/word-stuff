@@ -100,8 +100,10 @@ def walk_cell(grid, prefix, x, y):
         return results
 
     prefix = prefix + value
-    result = fast_search(prefix)
-    if len(result) == 0:
+    #result = fast_search(prefix)
+    #if len(result) == 0:
+    #    return results
+    if not WORD_TRIE.has_candidate(prefix):
         return results
 
     if len(prefix) > 2 and prefix in WORD_SET:

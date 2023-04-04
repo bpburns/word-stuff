@@ -62,6 +62,15 @@ class Trie(object):
         for child in node.children.values():
             self.dfs(child, prefix + node.char)
         
+    def has_candidate(self, x):
+        node = self.root
+        for char in x:
+            if char in node.children:
+                node = node.children[char]
+            else:
+                return False
+        return True
+
     def query(self, x):
         """Given an input (a prefix), retrieve all words stored in
         the trie with that prefix, sort the words by the number of 
